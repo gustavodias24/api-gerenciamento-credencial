@@ -35,6 +35,5 @@ def criar_empresa():
     return jsonify({"msg": "Empresa registrada com sucesso!"})
 
 
-
-if __name__ == "__mai__":
+if __name__ == "__main__":
     app.run()
