@@ -58,7 +58,7 @@ def criar_credencial(qtd):
 
     col_empresa.update_one(
         {"_id": payload["_id"]},
-        {"$set": {"qtdCredenciais": payload["qtdCredenciais"] + int(qtd)}}
+        {"$set": {"qtdCredenciais": col_empresa.find_one({'_id': payload["_id"]})["qtdCredenciais"] + int(qtd)}}
     )
 
     return jsonify({"msg": "Credenciais criada com sucesso!"})
