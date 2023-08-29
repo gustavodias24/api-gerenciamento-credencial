@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/criar_empresa", methods=["POST"])
 def criar_empresa():
-    _id = str(ObjectId)
+    _id = str(ObjectId())
 
     payload = request.json
 
