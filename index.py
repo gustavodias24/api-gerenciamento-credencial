@@ -40,5 +40,10 @@ def listar_empresa():
     return [x for x in col_empresa.find()]
 
 
+@app.route("/<_id>/pegar_logo", methods=["POST"])
+def pegar_loogo(_id):
+    return col_empresa.find_one({"_id": _id})["logoEmpresa"]
+
+
 if __name__ == "__main__":
     app.run()
