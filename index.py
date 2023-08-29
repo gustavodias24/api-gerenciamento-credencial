@@ -63,7 +63,7 @@ def criar_credencial(qtd):
 
     col_empresa.update_one(
         {"_id": payload["_id"]},
-        {"$set": {"qtdCredenciais":  qtd_atualizada}}
+        {"$set": {"qtdCredenciais": qtd_atualizada}}
     )
 
     return jsonify({"msg": "Credenciais criada com sucesso!"})
@@ -72,6 +72,21 @@ def criar_credencial(qtd):
 @app.route("/<_id>/listar_credencial", methods=["POST"])
 def listar_credencial(_id):
     return [x for x in col_credentials.find({"empresa_id": _id})]
+
+
+@app.route("/<todas>/<_id>/copiar_credenciais", methods=["POST"])
+def copiar_credenciais(todas, _id):
+    credenciais_for_copy = ""
+
+    if int(todas) == 0:
+        credenciais = col_credentials.find({"empresa_id": _id, "ativa": False})
+    else:
+        credenciais = col_credentials.find({"empresa_id": _id})
+
+    for c in credenciais:
+        credenciais_for_copy = credenciais_for_copy + c["_id"] + "\n"
+
+    return jsonify({"msg": credenciais_for_copy})
 
 
 if __name__ == "__main__":
