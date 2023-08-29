@@ -76,6 +76,7 @@ def listar_credencial(_id):
 
 @app.route("/<todas>/<_id>/copiar_credenciais", methods=["POST"])
 def copiar_credenciais(todas, _id):
+    
     credenciais_for_copy = ""
 
     if int(todas) == 0:
