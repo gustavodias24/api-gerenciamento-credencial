@@ -45,5 +45,29 @@ def pegar_loogo(_id):
     return jsonify({"msg": col_imagens.find_one({"_id": _id})["logoEmpresa"]})
 
 
+@app.route("/<qtd>/criar_credencial", methods=["POST"])
+def criar_credencial(qtd):
+    payload = request.json
+
+    for x in range(int(qtd)):
+        col_credentials.insert_one({
+            "_id": str(ObjectId()),
+            "ativa": False,
+            "empresa_id": payload["_id"]
+        })
+
+    col_empresa.update_one(
+        {"_id": payload["_id"]},
+        {"$set": {"qtdCredenciais": payload["qtdCredenciais"] + int(qtd)}}
+    )
+
+    return jsonify({"msg": "Credenciais criada com sucesso!"})
+
+
+@app.route("/<_id>/listar_credencial", methods=["POST"])
+def listar_credencial(_id):
+    return [x for x in col_credentials.find({"empresa_id": _id})]
+
+
 if __name__ == "__main__":
     app.run()
