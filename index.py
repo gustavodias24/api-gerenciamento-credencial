@@ -35,5 +35,10 @@ def criar_empresa():
     return jsonify({"msg": "Empresa registrada com sucesso!"})
 
 
+@app.route("/listar_empresa", methods=["POST"])
+def listar_empresa():
+    return [x for x in col_empresa.find()]
+
+
 if __name__ == "__main__":
     app.run()
