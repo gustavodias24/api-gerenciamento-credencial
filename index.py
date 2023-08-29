@@ -49,6 +49,11 @@ def pegar_loogo(_id):
 def criar_credencial(qtd):
     payload = request.json
 
+    nova_qtd = int(qtd)
+    qtd_antiga = int(col_empresa.find_one({'_id': payload["_id"]})["qtdCredenciais"])
+
+    qtd_atualizada = qtd_antiga + nova_qtd
+
     for x in range(int(qtd)):
         col_credentials.insert_one({
             "_id": str(ObjectId()),
@@ -58,7 +63,7 @@ def criar_credencial(qtd):
 
     col_empresa.update_one(
         {"_id": payload["_id"]},
-        {"$set": {"qtdCredenciais": col_empresa.find_one({'_id': payload["_id"]})["qtdCredenciais"] + int(qtd)}}
+        {"$set": {"qtdCredenciais":  qtd_atualizada}}
     )
 
     return jsonify({"msg": "Credenciais criada com sucesso!"})
