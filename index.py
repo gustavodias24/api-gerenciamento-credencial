@@ -76,7 +76,6 @@ def listar_credencial(_id):
 
 @app.route("/<todas>/<_id>/copiar_credenciais", methods=["POST"])
 def copiar_credenciais(todas, _id):
-    
     credenciais_for_copy = ""
 
     if int(todas) == 0:
@@ -88,6 +87,19 @@ def copiar_credenciais(todas, _id):
         credenciais_for_copy = credenciais_for_copy + c["_id"] + "\n"
 
     return jsonify({"msg": credenciais_for_copy})
+
+
+@app.route("/alterar_status", methods=["POST"])
+def alterar_status():
+    payload = request.json
+
+    credencial = col_credentials.find_one({"_id": payload["_id"]})
+
+    novo_status = False if credencial["ativa"] else True
+
+    col_credentials.update_one({"_id": payload["_id"]}, {"ativa": novo_status})
+
+    return jsonify({"msg": "Status atualizado com sucesso!"})
 
 
 if __name__ == "__main__":
