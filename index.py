@@ -97,7 +97,7 @@ def alterar_status():
 
     novo_status = False if credencial["ativa"] else True
 
-    col_credentials.update_one({"_id": payload["_id"]}, {"ativa": novo_status})
+    col_credentials.update_one({"_id": payload["_id"]}, {"$set": {"ativa": novo_status})
 
     return jsonify({"msg": "Status atualizado com sucesso!"})
 
