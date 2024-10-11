@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-cliente = MongoClient("mongodb+srv://gerenciadorcred:whBDSGd6FwuNnXOG@forworks.psgpztk.mongodb.net/")
+cliente = MongoClient('mongodb://localhost:27017/')
 db = cliente["kaizenApp"]
 col_credentials = db["credenciais"]
 col_empresa = db["empresa"]
@@ -103,4 +103,4 @@ def alterar_status():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=5001)

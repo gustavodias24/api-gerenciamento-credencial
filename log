@@ -1,0 +1,7 @@
+nohup: ignoring input
+[2024-10-11 13:38:31 -0300] [258223] [INFO] Starting gunicorn 23.0.0
+[2024-10-11 13:38:31 -0300] [258223] [INFO] Listening at: http://0.0.0.0:5001 (258223)
+[2024-10-11 13:38:31 -0300] [258223] [INFO] Using worker: sync
+[2024-10-11 13:38:31 -0300] [258241] [INFO] Booting worker with pid: 258241
+[2024-10-11 13:38:32 -0300] [258242] [INFO] Booting worker with pid: 258242
+[2024-10-11 13:38:32 -0300] [258244] [INFO] Booting worker with pid: 258244
