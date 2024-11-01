@@ -10,6 +10,14 @@ col_imagens = db["image_empresa"]
 
 app = Flask(__name__)
 
+@app.route("/ativacao", methods=["POST"])
+def ativacao():
+    payload = request.json
+    
+    payload.update({'ativa': True})
+    col_credentials.update_one({'_id': payload.get('chave')}, {'$set': payload})
+
+    return jsonify({"success": True, "msg": "Ativado com sucesso"})
 
 @app.route("/criar_empresa", methods=["POST"])
 def criar_empresa():
